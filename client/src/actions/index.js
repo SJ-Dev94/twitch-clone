@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+import database from "../firebaseconfig.js";
 import streams from '../apis/streams';
 import history from '../history'
 import {
