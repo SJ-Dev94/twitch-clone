@@ -1,5 +1,7 @@
 import { ref } from '../firebaseconfig.js';
 import streams from '../apis/streams';
+import axios from 'axios';
+
 import history from '../history'
 import {
     SIGN_IN, 
@@ -25,12 +27,13 @@ export const signOut = () => {
 }
 
 //This is currently uploading data to our database but we're running into an error. Dig into this
+//pretty sure this is because axios isnt being used properly in my push request so response.data is not defined because its not using axios (.data is an axios thing)
 export const createStream = (formValues) => {
   return async (dispatch, getState) => {
     const { userId } = getState().auth;
-    const response = await ref.push({ ...formValues, userId });
-    console.log(response);
-    dispatch({ type: CREATE_STREAM, payload: response.data });
+    const stream = { ...formValues, userId };
+    await ref.push(stream);
+    dispatch({ type: CREATE_STREAM, payload: stream});
 
     //Navigation to get user back to streams list
     history.push('/');
@@ -41,7 +44,6 @@ export const fetchStreams = () => async dispatch => {
   const response = await streams.get('streams');
   dispatch({type: FETCH_STREAMS, payload: response.data});
 } 
-
 export const fetchStream = (id) =>
 async dispatch => {
   const response = await streams.get(`/streams/${id}`)
