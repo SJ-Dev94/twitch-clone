@@ -1,7 +1,9 @@
 import React from "react";
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {fetchStreams} from '../../actions'
+import {fetchStreams} from '../../actions';
+import { result } from '../../actions';
 
 class StreamList extends React.Component {
   componentDidMount(){
@@ -22,6 +24,7 @@ class StreamList extends React.Component {
   }
   
   renderList(){
+    
     return this.props.streams.map(stream => {
       return (
         <div className="item" key={stream.id}>
@@ -63,10 +66,9 @@ class StreamList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    streams: Object.values(state.streams),
+    streams: result,
     currentUserId: state.auth.userId,
-    isSignedIn: state.auth.isSignedIn
+    isSignedIn: state.auth.isSignedIn,
   }
 }
-
 export default connect(mapStateToProps, {fetchStreams})(StreamList);

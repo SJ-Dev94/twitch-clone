@@ -40,10 +40,30 @@ export const createStream = (formValues) => {
   };
 };
 
+export const result = [];
 export const fetchStreams = () => async dispatch => {
-  const response = await streams.get('streams');
-  dispatch({type: FETCH_STREAMS, payload: response.data});
+  await ref.on('value', snapshot => {
+    
+    snapshot.forEach(function(streamSnapshot){
+      const streamListSnapshot = streamSnapshot.val();
+      result.push(streamListSnapshot);
+    
+})
+    console.log(result);
+    dispatch({ type: FETCH_STREAMS, payload: snapshot.val()});
+  }, function (errorObject){
+    console.log("The Read Failed: " + errorObject.code);
+  });
+  
 } 
+
+/*
+ref.on("value", function(snapshot) {
+  console.log(snapshot.val());
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+}); 
+*/
 export const fetchStream = (id) =>
 async dispatch => {
   const response = await streams.get(`/streams/${id}`)
