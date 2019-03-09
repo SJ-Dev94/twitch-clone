@@ -1,6 +1,7 @@
 import { ref } from '../firebaseconfig.js';
 import streams from '../apis/streams';
 import axios from 'axios';
+import uuid from 'uuid/v5';
 
 import history from '../history'
 import {
@@ -40,30 +41,24 @@ export const createStream = (formValues) => {
   };
 };
 
-export const result = [];
+export const getStreams = (streams) => ({type: FETCH_STREAMS, streams});
+
+//left off at figuring out how to get the unique key of each stream
 export const fetchStreams = () => async dispatch => {
-  await ref.on('value', snapshot => {
-    
-    snapshot.forEach(function(streamSnapshot){
+  const result = [];
+  await ref.once('value', snapshot => {
+    snapshot.forEach( streamSnapshot => {
       const streamListSnapshot = streamSnapshot.val();
       result.push(streamListSnapshot);
+      
     
 })
     console.log(result);
-    dispatch({ type: FETCH_STREAMS, payload: snapshot.val()});
-  }, function (errorObject){
-    console.log("The Read Failed: " + errorObject.code);
+    dispatch(getStreams(result));
   });
   
 } 
 
-/*
-ref.on("value", function(snapshot) {
-  console.log(snapshot.val());
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-}); 
-*/
 export const fetchStream = (id) =>
 async dispatch => {
   const response = await streams.get(`/streams/${id}`)

@@ -7,16 +7,17 @@ import {
   DELETE_STREAM
 } from '../actions/types';
 
-export default (state = {}, action) => {
+export default (state = [], action) => {
   switch (action.type){
     case FETCH_STREAMS:
-      return {...state, ..._.mapKeys(action.payload, 'id')};
+      console.log(action.streams)
+      return action.streams;
     case FETCH_STREAM:
       return {...state, [action.payload.id]: action.payload};
     case CREATE_STREAM:
-      console.log(action.payload);
       //debugger;
-      return {...state, [action.payload.id]: action.payload};
+      debugger;
+      return [...state, action.stream];
     case EDIT_STREAM:
       return {...state, [action.payload.id]: action.payload};
     /* case DELETE_STREAM:
