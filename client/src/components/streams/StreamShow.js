@@ -3,16 +3,17 @@ import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
 
-class StreamShow extends 
-React.Component {
-  constructor(props){
+class StreamShow extends
+  React.Component {
+  constructor(props) {
     super(props);
     this.videoRef = React.createRef();
   }
-  
-  componentDidMount(){
-    const {id} = this.props.match.params
-    
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    console.log(id);
+
     this.props.fetchStream(id);
     this.buildPlayer();
   }
@@ -21,7 +22,7 @@ React.Component {
     this.buildPlayer();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.player.destroy();
   }
 
@@ -39,22 +40,35 @@ React.Component {
     this.player.load();
   }
 
-  render(){
-    if (!this.props.stream){
+  render() {
+    const x = [];
+    const y = this.props.stream;
+    console.log(x.push(y));
+
+    if (!this.props.stream) {
       return <div>Loading...</div>
     }
     return (
       <div>
-        <video ref={this.videoRef} style={{width: '100%'}} controls={true} />
+        <video ref={this.videoRef} style={{ width: '100%' }} controls={true} />
         <h1> {this.props.stream.title}</h1>
         <h5>          {this.props.stream.description}
         </h5>
+
       </div>
+
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[ownProps.match.params.id]}
+  const stream = state.streams.find(stream => stream.id === ownProps.match.params.id)
+  if (stream) {
+    return { stream }
+  } else {
+    return { stream: {} }
+  }
 }
-export default connect(mapStateToProps, {fetchStream})(StreamShow);
+
+
+export default connect(mapStateToProps, { fetchStream })(StreamShow);

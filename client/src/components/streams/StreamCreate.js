@@ -8,17 +8,17 @@ class StreamCreate extends React.Component {
     this.props.createStream(formValues);
   }
 
-  render(){ 
+  render() {
     return (
       <div>
         <h3>Create a Stream</h3>
-        <StreamForm onSubmit={this.onSubmit}/>
+        <StreamForm onSubmit={this.onSubmit} />
       </div>
     );
   }
 }
 
 export default connect(
-  null, 
+  null,
   { createStream }
-  )(StreamCreate);
+)(StreamCreate);

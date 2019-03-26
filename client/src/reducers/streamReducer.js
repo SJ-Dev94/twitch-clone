@@ -8,21 +8,18 @@ import {
 } from '../actions/types';
 
 export default (state = [], action) => {
-  switch (action.type){
+  switch (action.type) {
     case FETCH_STREAMS:
-      console.log(action.streams)
       return action.streams;
     case FETCH_STREAM:
-      return {...state, [action.payload.id]: action.payload};
+      return [...state, action.streams];
     case CREATE_STREAM:
-      //debugger;
-      debugger;
-      return [...state, action.stream];
+      return [...state, action.payload];
     case EDIT_STREAM:
-      return {...state, [action.payload.id]: action.payload};
+      return [...state, action.payload];
     /* case DELETE_STREAM:
       return _.omit(state, action.payload); */
-    default: 
+    default:
       return state;
   }
 }

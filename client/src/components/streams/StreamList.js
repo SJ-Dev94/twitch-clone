@@ -2,15 +2,15 @@ import React from "react";
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {fetchStreams} from '../../actions';
+import { fetchStreams } from '../../actions';
 import { result } from '../../actions';
 
 class StreamList extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchStreams();
   }
 
-  renderAdmin(stream){
+  renderAdmin(stream) {
     if (stream.userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
@@ -22,12 +22,12 @@ class StreamList extends React.Component {
       )
     }
   }
-  
-  renderList(){
-    
+
+  renderList() {
+
     return this.props.streams.map(stream => {
       return (
-        <div className="item" key={stream.title}>
+        <div className="item" key={stream.streamId}>
           {this.renderAdmin(stream)}
           <i className="large middle aligned icon camera" />
           <div className="content">
@@ -39,12 +39,12 @@ class StreamList extends React.Component {
         </div>
       );
     })
-  } 
+  }
 
-  renderCreate(){
+  renderCreate() {
     if (this.props.isSignedIn) {
       return (
-        <div style={{textAlign: 'right'}}>
+        <div style={{ textAlign: 'right' }}>
           <Link to="/streams/new" className="ui button primary">
             Create Stream
           </Link>
@@ -53,7 +53,7 @@ class StreamList extends React.Component {
     }
   }
 
-  render(){
+  render() {
     return (
       <div>
         <h2>Streams</h2>
@@ -72,4 +72,4 @@ const mapStateToProps = (state) => {
     isSignedIn: state.auth.isSignedIn,
   }
 }
-export default connect(mapStateToProps, {fetchStreams})(StreamList);
+export default connect(mapStateToProps, { fetchStreams })(StreamList);
