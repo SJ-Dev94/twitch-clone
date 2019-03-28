@@ -12,8 +12,6 @@ class StreamShow extends
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    console.log(id);
-
     this.props.fetchStream(id);
     this.buildPlayer();
   }
@@ -41,18 +39,15 @@ class StreamShow extends
   }
 
   render() {
-    const x = [];
-    const y = this.props.stream;
-    console.log(x.push(y));
-
     if (!this.props.stream) {
       return <div>Loading...</div>
     }
+    const { title, description } = this.props.stream;
     return (
       <div>
         <video ref={this.videoRef} style={{ width: '100%' }} controls={true} />
-        <h1> {this.props.stream.title}</h1>
-        <h5>          {this.props.stream.description}
+        <h1>{title}</h1>
+        <h5>          {description}
         </h5>
 
       </div>
@@ -61,13 +56,20 @@ class StreamShow extends
   }
 }
 
+
 const mapStateToProps = (state, ownProps) => {
-  const stream = state.streams.find(stream => stream.id === ownProps.match.params.id)
+  console.log(state);
+  const stream = state.streams[0];
+  //the log below properly retrieves the params.id
+  //state.streams.find is not grabbing a stream
+  console.log(ownProps.match.params)
+  console.log(stream);
   if (stream) {
     return { stream }
   } else {
-    return { stream: {} }
+    return { stream: 'cant find it' }
   }
+
 }
 
 

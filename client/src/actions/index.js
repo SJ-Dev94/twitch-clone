@@ -57,7 +57,6 @@ export const fetchStreams = () =>
         const streamListSnapshot = streamSnapshot.val();
         result.push(streamListSnapshot);
       });
-      console.log(result);
       dispatch(getStreams(result));
     });
 
@@ -79,7 +78,7 @@ export const fetchStream = (id) =>
   async dispatch => {
     const ref = database.ref("streams");
     const result = [];
-    await ref.orderByChild(`title`).equalTo(`${id}`).once('value', streamSnapshot => {
+    await ref.orderByChild(`title`).equalTo(`${id}`).on('value', streamSnapshot => {
       streamSnapshot.forEach(child => {
         const stream = child.val();
         result.push(stream);

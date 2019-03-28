@@ -12,7 +12,7 @@ export default (state = [], action) => {
     case FETCH_STREAMS:
       return action.streams;
     case FETCH_STREAM:
-      return [...state, action.streams];
+      return action.streams;
     case CREATE_STREAM:
       return [...state, action.payload];
     case EDIT_STREAM:
