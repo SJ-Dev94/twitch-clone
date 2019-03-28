@@ -60,14 +60,10 @@ class StreamShow extends
 const mapStateToProps = (state, ownProps) => {
   console.log(state);
   const stream = state.streams[0];
-  //the log below properly retrieves the params.id
-  //state.streams.find is not grabbing a stream
-  console.log(ownProps.match.params)
-  console.log(stream);
   if (stream) {
     return { stream }
   } else {
-    return { stream: 'cant find it' }
+    return { stream: {} }
   }
 
 }
