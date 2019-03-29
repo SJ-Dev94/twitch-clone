@@ -78,7 +78,8 @@ export const fetchStream = (id) =>
   async dispatch => {
     const ref = database.ref("streams");
     const result = [];
-    await ref.orderByChild(`title`).equalTo(`${id}`).on('value', streamSnapshot => {
+    console.log(result);
+    await ref.orderByChild(`title`).equalTo(id).on('value', streamSnapshot => {
       streamSnapshot.forEach(child => {
         const stream = child.val();
         result.push(stream);
@@ -88,22 +89,39 @@ export const fetchStream = (id) =>
 
   };
 
-
+export const editStreamAction = (stream) => ({ type: EDIT_STREAM, payload: stream });
 //currently working on this
 //https://firebase.google.com/docs/database/web/read-and-write
-export const editStream = (title, formValues) => async dispatch => {
-  const ref = null;
-  const response = await ref.update(`/streams/${title}`, formValues)
+export const editStream = (id, formValues) => async dispatch => {
 
+  const ref = database.ref(`streams`);
+  const result = [];
+  await ref.orderByChild(`title`).equalTo(id).on('value', streamSnapshot => {
+    streamSnapshot.forEach(child => {
+      const x = child.ref.update({ title: formValues.title, description: formValues.description });
+      result.push(x);
+    });
+    dispatch(editStreamAction(result));
+    history.push('/');
+  });
 
-  dispatch({ type: EDIT_STREAM, payload: response });
-  history.push('/');
+  /*const ref = null;
+  const response = await ref.update(`/streams/${id}`, formValues)*/
+
 }
 
+export const deleteStreamAction = (stream) => ({ type: DELETE_STREAM, payload: stream });
 
 export const deleteStream = (id) => async dispatch => {
-  await streams.delete(`/streams/${id}`)
-
-  dispatch({ type: DELETE_STREAM, payload: id })
+  const ref = database.ref(`streams`);
+  const result = [];
+  await ref.orderByChild(`title`).equalTo(id).on('value', streamSnapshot => {
+    streamSnapshot.forEach(child => {
+      const x = child.ref.remove();
+      result.push(x);
+    });
+    dispatch(deleteStreamAction(result));
+    history.push('/');
+  });
   history.push('/');
 } 
