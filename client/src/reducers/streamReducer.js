@@ -4,7 +4,8 @@ import {
   FETCH_STREAMS,
   CREATE_STREAM,
   EDIT_STREAM,
-  DELETE_STREAM
+  DELETE_STREAM,
+  EDIT_USER_SETTINGS
 } from '../actions/types';
 
 export default (state = [], action) => {
@@ -19,6 +20,8 @@ export default (state = [], action) => {
       return [...state, action.payload];
     case DELETE_STREAM:
       return _.omit(state, action.payload);
+    case EDIT_USER_SETTINGS:
+      return [...state, action.payload];
     default:
       return state;
   }
