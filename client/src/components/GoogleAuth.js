@@ -18,10 +18,13 @@ class GoogleAuth extends React.Component {
     });
   }
 
+  //Currently this is adding a 0 to our firebase data, which means its storing as an array, but its confusing because i'm not storing it as an array
+  //this only happens on login logout, refresh does not happen.
+
   onAuthChange = (isSignedIn) => {
     if (isSignedIn) {
       this.props.signIn(this.auth.currentUser.get().getId());
-      let googleUserInfo = [];
+      /*let googleUserInfo = [];
       googleUserInfo.push(this.auth.currentUser.Ab.w3)
       googleUserInfo = googleUserInfo.map(x => {
         return {
@@ -50,7 +53,7 @@ class GoogleAuth extends React.Component {
           ref.push(googleUserInfoObject);
         }
       });
-
+      */
     } else {
       this.props.signOut();
     }

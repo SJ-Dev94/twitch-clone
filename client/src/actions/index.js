@@ -62,16 +62,7 @@ export const fetchStreams = () =>
 
   }
 
-/* function getStreamData(streamId) {
-async () => {
-  const ref = database.ref(`users/${streamId}`.once('value'));
-  await (snapshot) => {
-    var streamId = snapshot.key;
-  }
-}
-}
 
-*/
 export const getStream = (streams) => ({ type: FETCH_STREAM, streams });
 
 export const fetchStream = (id) =>
@@ -121,7 +112,6 @@ export const deleteStream = (id) => async dispatch => {
       result.push(x);
     });
     dispatch(deleteStreamAction(result));
-    history.push('/');
   });
   history.push('/');
 } 

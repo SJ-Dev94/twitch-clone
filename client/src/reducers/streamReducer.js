@@ -19,7 +19,7 @@ export default (state = [], action) => {
     case EDIT_STREAM:
       return [...state, action.payload];
     case DELETE_STREAM:
-      return _.omit(state, action.payload);
+      return _.filter(state, action.payload);
     case EDIT_USER_SETTINGS:
       return [...state, action.payload];
     default:
