@@ -11,7 +11,10 @@ class StreamList extends React.Component {
   }
 
   renderAdmin(stream) {
-    if (stream.userId === this.props.currentUserId) {
+    console.log(stream.userId);
+
+    console.log(this.props.currentUserId)
+    if (stream.userId[0].userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
           <Link className="ui button primary" to={`streams/edit/${stream.title}`}>Edit</Link>
@@ -65,6 +68,7 @@ class StreamList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state.auth.userId);
   return {
     streams: state.streams,
     currentUserId: state.auth.userId,

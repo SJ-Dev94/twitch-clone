@@ -6,3 +6,4 @@ export const FETCH_STREAM = 'FETCH_STREAM';
 export const DELETE_STREAM = 'DELETE_STREAM';
 export const EDIT_STREAM = 'EDIT_STREAM';
 export const EDIT_USER_SETTINGS = 'EDIT_USER_SETTINGS';
+export const ADD_USER_TO_STATE = 'ADD_USER_TO_STATE';

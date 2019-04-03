@@ -2,6 +2,7 @@ import React from 'react';
 import { database } from '../firebaseconfig.js';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions'
+import { SIGN_IN, SIGN_OUT } from '../actions/types';
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -18,14 +19,15 @@ class GoogleAuth extends React.Component {
     });
   }
 
-  //Currently this is adding a 0 to our firebase data, which means its storing as an array, but its confusing because i'm not storing it as an array
-  //this only happens on login logout, refresh does not happen.
+
 
   onAuthChange = (isSignedIn) => {
+    let googleUserInfo = [];
+
+
     if (isSignedIn) {
-      this.props.signIn(this.auth.currentUser.get().getId());
-      /*let googleUserInfo = [];
       googleUserInfo.push(this.auth.currentUser.Ab.w3)
+
       googleUserInfo = googleUserInfo.map(x => {
         return {
           userId: x.Eea,
@@ -36,28 +38,28 @@ class GoogleAuth extends React.Component {
           userLastName: x.wea
         }
       })
-      const arrayToObject = (x) => x.reduce((obj, item) => {
-        obj[item.id] = item;
-        return obj
-      });
-
-      const googleUserInfoObject = arrayToObject(googleUserInfo);
-      console.log(googleUserInfoObject);
 
       const ref = database.ref("users");
 
-      ref.orderByChild(`userId`).equalTo(googleUserInfoObject.userId).once('value', streamSnapshot => {
+      //how to use streamsnapshot with googleuserinfoobject
+      ref.orderByChild(`userId`).equalTo(googleUserInfo[0].userId).once('value', streamSnapshot => {
         if (streamSnapshot.exists()) {
-          return
+          googleUserInfo[0] = (streamSnapshot.val())
         } else {
-          ref.push(googleUserInfoObject);
+          return
         }
+        console.log(googleUserInfo)
+        /*this.props.signIn(googleUserInfo[0].userId); */
       });
-      */
-    } else {
+
+    }
+
+    else {
       this.props.signOut();
     }
+
   }
+
 
   onSignInClick = () => {
     this.auth.signIn();

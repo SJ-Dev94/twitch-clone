@@ -38,7 +38,7 @@ const Header = () => {
               <div class="item">Channel</div>
               <div class="item">Dashboard</div>
               <div class="item">Friends</div>
-              <div class="item">Settings</div>
+              <Link to="settings/profile" className="item">Settings</Link>
               <div class="item"><GoogleAuth /></div>
             </div>
           </div>

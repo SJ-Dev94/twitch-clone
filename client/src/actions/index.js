@@ -10,7 +10,8 @@ import {
   FETCH_STREAMS,
   FETCH_STREAM,
   DELETE_STREAM,
-  EDIT_STREAM
+  EDIT_STREAM,
+  ADD_USER_TO_STATE
 } from './types'
 const uuidv4 = require('uuid/v4');
 
@@ -28,15 +29,21 @@ export const signOut = () => {
   }
 }
 
-//This is currently uploading data to our database but we're running into an error. Dig into this
-//pretty sure this is because axios isnt being used properly in my push request so response.data is not defined because its not using axios (.data is an axios thing)
+export const addFireBaseUserToState = (userId) => {
+  return {
+    type: ADD_USER_TO_STATE,
+    payload: userId
+  }
+}
+
+
 export const createStream = (formValues) => {
   return async (dispatch, getState) => {
     const ref = database.ref("streams");
     const { userId } = getState().auth;
+    console.log(userId)
     const streamId = uuidv4();
     const stream = { ...formValues, userId, streamId };
-    console.log(stream);
     await ref.push(stream);
     dispatch({ type: CREATE_STREAM, payload: stream });
 
@@ -47,7 +54,7 @@ export const createStream = (formValues) => {
 
 export const getStreams = (streams) => ({ type: FETCH_STREAMS, streams });
 
-//left off at figuring out how to get the unique key of each stream
+
 export const fetchStreams = () =>
   async dispatch => {
     const ref = database.ref("streams");
