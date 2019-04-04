@@ -1,8 +1,8 @@
 import React from 'react';
 import { database } from '../firebaseconfig.js';
 import { connect } from 'react-redux';
-import { signIn, signOut } from '../actions'
-import { SIGN_IN, SIGN_OUT } from '../actions/types';
+import { signIn, signOut, addUserInfoToState } from '../actions'
+
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -48,11 +48,15 @@ class GoogleAuth extends React.Component {
           googleUserInfo[0] = (child.val())
 
           console.log(googleUserInfo[0].userId)
+          const userInfo = googleUserInfo[0];
+          this.props.addUserInfoToState(userInfo);
           this.props.signIn(googleUserInfo[0].userId);
+
         })
       });
 
     }
+
 
     else {
       this.props.signOut();
@@ -95,4 +99,4 @@ const mapStateToProps = (state) => {
   return { isSignedIn: state.auth.isSignedIn };
 }
 
-export default connect(mapStateToProps, { signIn, signOut })(GoogleAuth);
+export default connect(mapStateToProps, { signIn, signOut, addUserInfoToState })(GoogleAuth);

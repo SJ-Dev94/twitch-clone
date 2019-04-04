@@ -29,6 +29,12 @@ export const signOut = () => {
   }
 }
 
+export const addUserInfoToState = (userInfo) => {
+  return {
+    type: ADD_USER_TO_STATE,
+    payload: userInfo
+  }
+}
 export const addFireBaseUserToState = (userId) => {
   return {
     type: ADD_USER_TO_STATE,
