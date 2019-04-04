@@ -43,13 +43,13 @@ class GoogleAuth extends React.Component {
 
       //how to use streamsnapshot with googleuserinfoobject
       ref.orderByChild(`userId`).equalTo(googleUserInfo[0].userId).once('value', streamSnapshot => {
-        if (streamSnapshot.exists()) {
-          googleUserInfo[0] = (streamSnapshot.val())
-        } else {
-          return
-        }
-        console.log(googleUserInfo)
-        /*this.props.signIn(googleUserInfo[0].userId); */
+        streamSnapshot.forEach((child) => {
+
+          googleUserInfo[0] = (child.val())
+
+          console.log(googleUserInfo[0].userId)
+          this.props.signIn(googleUserInfo[0].userId);
+        })
       });
 
     }
