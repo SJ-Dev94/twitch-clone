@@ -47,7 +47,6 @@ class GoogleAuth extends React.Component {
 
           googleUserInfo[0] = (child.val())
 
-          console.log(googleUserInfo[0].userId)
           const userInfo = googleUserInfo[0];
           this.props.addUserInfoToState(userInfo);
           this.props.signIn(googleUserInfo[0].userId);

@@ -1,6 +1,7 @@
 import { database } from '../firebaseconfig.js';
 import streams from '../apis/streams';
 import axios from 'axios';
+import { storageRef } from '../firebaseconfig.js'
 
 import history from '../history'
 import {
@@ -11,7 +12,9 @@ import {
   FETCH_STREAM,
   DELETE_STREAM,
   EDIT_STREAM,
-  ADD_USER_TO_STATE
+  ADD_USER_TO_STATE,
+  UPDATE_USER_STATE,
+  UPDATE_USER_PROFILE_PIC
 } from './types'
 const uuidv4 = require('uuid/v4');
 
@@ -35,6 +38,16 @@ export const addUserInfoToState = (userInfo) => {
     payload: userInfo
   }
 }
+
+export const updateUserState = (userInfo) => {
+  return {
+    type: UPDATE_USER_STATE,
+    payload: userInfo
+  }
+}
+
+
+
 export const addFireBaseUserToState = (userId) => {
   return {
     type: ADD_USER_TO_STATE,
@@ -75,6 +88,23 @@ export const fetchStreams = () =>
 
   }
 
+
+
+
+export const updateUserProfilePicAction = (img) => ({
+  type: UPDATE_USER_PROFILE_PIC,
+  payload: img
+})
+
+
+let selectedImage;
+
+export const handleUploadProfilePictureAction = (userId) => {
+  return {
+    type: UPDATE_USER_PROFILE_PIC,
+    payload: userId
+  }
+}
 
 export const getStream = (streams) => ({ type: FETCH_STREAM, streams });
 

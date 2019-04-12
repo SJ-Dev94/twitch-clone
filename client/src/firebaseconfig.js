@@ -13,3 +13,5 @@ firebase.initializeApp(config);
 
 export const database = firebase.database();
 
+export const storageService = firebase.storage();
+export const storageRef = storageService.ref();

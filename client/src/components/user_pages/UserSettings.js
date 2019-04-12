@@ -1,34 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStream } from '../../actions'
+import { handleUploadProfilePictureAction } from '../../actions'
+import UserSettings from './UserSettingsForm';
 
-class UserSettings extends React.Component {
+class UserSettingsPage extends React.Component {
+  onSubmit = (formValues) => {
+    this.props.handleUploadProfilePicture(formValues);
+  }
 
   render() {
     return (
       <div>
-        <h1>Settings</h1>
-        <div>
-          <h3>Profile Picture</h3>
-          <button>Update</button>
-        </div>
-        <div>
-          <h3>Profile Banner</h3>
-          <button>Update</button>
-        </div>
-        <div>
-          <h3>Profile Settings</h3>
-          <button>Update</button>
-        </div>
+        <UserSettings onSubmit={this.onSubmit} />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[0] }
+const mapStateToProps = (state) => {
+
+  return {
+    userId: state.auth && state.auth.userInfo ? state.auth.userInfo.userId : null,
+    isSignedIn: state.auth.isSignedIn
+  }
 }
-export default connect(
-  null,
-  { createStream }
-)(UserSettings);
+export default connect(mapStateToProps, { handleUploadProfilePictureAction })(UserSettingsPage);
