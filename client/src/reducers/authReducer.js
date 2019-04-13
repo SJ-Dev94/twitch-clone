@@ -4,7 +4,8 @@ import {
   ADD_USER_TO_STATE,
   UPDATE_USER_STATE,
   EDIT_USER_SETTINGS,
-  UPDATE_USER_PROFILE_PIC
+  UPDATE_USER_PROFILE_PIC,
+  UPDATE_USER_PROFILE_BANNER
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -17,7 +18,7 @@ const INITIAL_STATE = {
     userFirstName: null,
     userId: null,
     userLastName: null,
-    userProfileBanner: null
+    userBanner: null
   },
 
 };
@@ -35,12 +36,19 @@ export default (state = INITIAL_STATE, action) => {
     case UPDATE_USER_STATE:
       return { userInfo: action.payload };
     case UPDATE_USER_PROFILE_PIC:
-
       return {
         ...state,
         userInfo: {
           ...state.userInfo,
           userAvi: action.payload
+        }
+      };
+    case UPDATE_USER_PROFILE_BANNER:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          userBanner: action.payload
         }
       };
     case EDIT_USER_SETTINGS:

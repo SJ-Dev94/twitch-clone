@@ -14,7 +14,10 @@ import {
   EDIT_STREAM,
   ADD_USER_TO_STATE,
   UPDATE_USER_STATE,
-  UPDATE_USER_PROFILE_PIC
+  UPDATE_USER_PROFILE_PIC,
+  UPDATE_USER_PROFILE_BANNER,
+  UPDATE_USER_DISPLAY_NAME,
+  UPDATE_USER_BIO
 } from './types'
 const uuidv4 = require('uuid/v4');
 
@@ -97,11 +100,32 @@ export const updateUserProfilePicAction = (img) => ({
 })
 
 
-let selectedImage;
+
 
 export const handleUploadProfilePictureAction = (userId) => {
   return {
     type: UPDATE_USER_PROFILE_PIC,
+    payload: userId
+  }
+}
+
+export const handleUploadProfileBannerAction = (userId) => {
+  return {
+    type: UPDATE_USER_PROFILE_BANNER,
+    payload: userId
+  }
+}
+
+export const handleDisplayNameChangeAction = (userId) => {
+  return {
+    type: UPDATE_USER_DISPLAY_NAME,
+    payload: userId
+  }
+}
+
+export const handleUserBioChangeAction = (userId) => {
+  return {
+    type: UPDATE_USER_BIO,
     payload: userId
   }
 }

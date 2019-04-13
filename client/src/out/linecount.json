@@ -1,0 +1,318 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "/Users/seth/projects/twitchclone/client/src",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-04-13 15:30:30",
+            "filesum": 50,
+            "codesum": 4589,
+            "commentsum": 79,
+            "blanksum": 210,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".eslintrs.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": ".firebase/hosting.YnVpbGQ.cache"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".firebaserc"
+                },
+                {
+                    "blank": 3,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": ".prettierrc"
+                },
+                {
+                    "blank": 32,
+                    "code": 123,
+                    "comment": 5,
+                    "filename": "actions/index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "actions/types.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "apis/streams.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "build/asset-manifest.json"
+                },
+                {
+                    "filename": "build/favicon.ico",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/index.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "build/manifest.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "build/precache-manifest.a601d27f8672ebae40d728f5c6038cf2.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 10,
+                    "comment": 17,
+                    "filename": "build/service-worker.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 2,
+                    "filename": "build/static/js/2.a9437034.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/2.a9437034.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/js/main.c6845d96.chunk.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/main.c6845d96.chunk.js.map"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "build/static/js/runtime~main.fdfcfda2.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "build/static/js/runtime~main.fdfcfda2.js.map"
+                },
+                {
+                    "blank": 2,
+                    "code": 30,
+                    "comment": 1,
+                    "filename": "components/App.js"
+                },
+                {
+                    "blank": 24,
+                    "code": 76,
+                    "comment": 1,
+                    "filename": "components/GoogleAuth.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 46,
+                    "comment": 1,
+                    "filename": "components/Header.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "components/Modal.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "components/streams/StreamCreate.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "components/streams/StreamDelete.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "components/streams/StreamEdit.js"
+                },
+                {
+                    "blank": 10,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "components/streams/StreamForm.js"
+                },
+                {
+                    "blank": 8,
+                    "code": 70,
+                    "comment": 0,
+                    "filename": "components/streams/StreamList.js"
+                },
+                {
+                    "blank": 14,
+                    "code": 58,
+                    "comment": 1,
+                    "filename": "components/streams/StreamShow.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "components/user_pages/UserSettings.js"
+                },
+                {
+                    "blank": 23,
+                    "code": 77,
+                    "comment": 3,
+                    "filename": "components/user_pages/UserSettingsForm.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "components/users/userFileUpload.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "components/users/userFileUploadField.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "context.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "database.rules.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 26,
+                    "comment": 0,
+                    "filename": "firebase.json"
+                },
+                {
+                    "blank": 4,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "firebaseconfig.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "firebaseindex.js"
+                },
+                {
+                    "blank": 37,
+                    "code": 47,
+                    "comment": 39,
+                    "filename": "functions/.eslintrc.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "functions/.gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 6,
+                    "filename": "functions/index.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3581,
+                    "comment": 0,
+                    "filename": "functions/package-lock.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "functions/package.json"
+                },
+                {
+                    "blank": 2,
+                    "code": 2,
+                    "comment": 1,
+                    "filename": "history.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "reducers/authReducer.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "reducers/index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "reducers/streamReducer.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "storage.rules"
+                }
+            ]
+        }
+    ]
+}
