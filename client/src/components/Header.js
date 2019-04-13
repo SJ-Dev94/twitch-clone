@@ -36,6 +36,7 @@ class Header extends React.Component {
           <div class="ui compact menu">
             <div class="ui simple dropdown item">
               <img src={this.props.userAvi} alt="User AVI"></img>
+              <p>{this.props.displayName}</p>
               <i class="dropdown icon"></i>
               <div class="menu">
                 <div class="item">Channel</div>
@@ -56,7 +57,8 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    userAvi: state.auth && state.auth.userInfo ? state.auth.userInfo.userAvi : null
+    userAvi: state.auth && state.auth.userInfo ? state.auth.userInfo.userAvi : null,
+    displayName: state.auth && state.auth.userInfo ? state.auth.userInfo.displayName : null
   }
 }
 
