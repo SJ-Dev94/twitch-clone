@@ -62,10 +62,14 @@ export const addFireBaseUserToState = (userId) => {
 export const createStream = (formValues) => {
   return async (dispatch, getState) => {
     const ref = database.ref("streams");
-    const { userId } = getState().auth;
-    console.log(userId)
+    const { uid } = getState().auth.userInfo;
+
+
+    /* userId: 
+    */
+    console.log(uid)
     const streamId = uuidv4();
-    const stream = { ...formValues, userId, streamId };
+    const stream = { ...formValues, uid, streamId };
     await ref.push(stream);
     dispatch({ type: CREATE_STREAM, payload: stream });
 

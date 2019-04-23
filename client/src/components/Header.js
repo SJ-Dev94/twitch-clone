@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import GoogleAuth from './GoogleAuth'
+import GoogleAuth from './GoogleAuth';
+import { auth } from '../firebaseconfig';
+import { signIn, signOut, addUserInfoToState } from '../actions'
+import SignOutButton from './user_pages/UserSignOut';
 
 //add js to change ui based on user login
 class Header extends React.Component {
 
+
   render() {
     return (
       <div className="ui secondary pointing menu">
+
+
         <Link to="/" className="item">
-          <i class="fab fa-twitch"></i>
+          <i className="fab fa-twitch"></i>
         </Link>
         <Link to="/" className="item">
           Discover
@@ -18,9 +24,12 @@ class Header extends React.Component {
         <Link to="/" className="item">
           Following
       </Link>
-        <Link to="/" className="item">
-          Browse
-      </Link>
+
+        <Link to="/signIn">Log In</Link>
+
+        <SignOutButton />
+        <Link to="/signUp">Sign Up</Link>
+
         <Link to="/" className="item">
           ...
       </Link>
@@ -30,20 +39,21 @@ class Header extends React.Component {
             <div className="ui icon input">
               <input type="text" placeholder="Search..." />
               <i className="search link icon" />
+
             </div>
           </div>
 
-          <div class="ui compact menu">
-            <div class="ui simple dropdown item">
+          <div className="ui compact menu">
+            <div className="ui simple dropdown item">
               <img src={this.props.userAvi} alt="User AVI"></img>
               <p>{this.props.displayName}</p>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                <div class="item">Channel</div>
-                <div class="item">Dashboard</div>
-                <div class="item">Friends</div>
+              <i className="dropdown icon"></i>
+              <div className="menu">
+                <div className="item">Channel</div>
+                <div className="item">Dashboard</div>
+                <div className="item">Friends</div>
                 <Link to="settings/profile" className="item">Settings</Link>
-                <div class="item"><GoogleAuth /></div>
+                <div className="item"><GoogleAuth /></div>
               </div>
             </div>
           </div>
@@ -57,9 +67,9 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    userAvi: state.auth && state.auth.userInfo ? state.auth.userInfo.userAvi : null,
+    userAvi: state.auth && state.auth.userInfo ? state.auth.userInfo.photoURL : null,
     displayName: state.auth && state.auth.userInfo ? state.auth.userInfo.displayName : null
   }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { addUserInfoToState })(Header);

@@ -2,10 +2,11 @@ import React, { Component, PropTypes, } from 'react';
 import { connect } from 'react-redux';
 import { handleUploadProfilePictureAction, handleUploadProfileBannerAction } from '../../actions'
 import { Field, reduxForm } from 'redux-form';
-import { database, storageRef } from '../../firebaseconfig'
+import { database, storageRef, auth } from '../../firebaseconfig'
 
 
 let selectedImage;
+let selectedText;
 
 class UserSettings extends React.Component {
 
@@ -40,6 +41,7 @@ class UserSettings extends React.Component {
     selectedImage = e.target.files[0];
   }
 
+
   //uploads profile picture to firebase file storage
   handleUploadProfilePicture = (e) => {
     let url;
@@ -54,7 +56,12 @@ class UserSettings extends React.Component {
     }, () => {
       //grabs url as a callback and then uploads url to firebase, then adds it to redux store
       url = ref.getDownloadURL().then(function (url) {
-        let result;
+
+        let user = auth.currentUser;
+
+        user.updateProfile({
+          photoURL: url
+        })
         this.handleUploadUserAviUrlToFireBase(url);
 
         this.props.handleUploadProfilePictureAction(url);
@@ -92,6 +99,32 @@ class UserSettings extends React.Component {
     });
   }
 
+  handleChange(e) {
+    selectedText = e.target.value;
+  }
+
+  handleUpdateDisplayName = () => {
+    var user = auth.currentUser;
+    user.updateProfile({
+      displayName: selectedText
+    })
+  }
+
+  handleUploadUserAviUrlToFireBase = async (url) => {
+    const ref = database.ref(`User_Bios/${this.props.userId}/`);
+
+    await ref.set({
+      selectedText
+    })
+  }
+
+  handleUpdateBio = () => {
+    let url;
+    const path = `User_Bios/${this.props.userId}/`;
+    const ref = database.ref(path);
+    ref.set(selectedText);
+  }
+
   render() {
     return (
       <div>
@@ -110,11 +143,11 @@ class UserSettings extends React.Component {
         <div>
           <h3>Profile Settings</h3>
           <h5>Display Name</h5>
-          <input type="text"></input>
-          <button>Update</button>
+          <input type="text" onChange={this.handleChange}></input>
+          <button onClick={this.handleUpdateDisplayName}>Update</button>
           <h5>Bio</h5>
-          <textarea></textarea>
-          <button>Update</button>
+          <textarea type="text" onChange={this.handleChange}></textarea>
+          <button onClick={this.handleUpdateBio}>Update</button>
         </div>
       </div>
     );
@@ -124,7 +157,7 @@ class UserSettings extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-    userId: state.auth && state.auth.userInfo ? state.auth.userInfo.userId : null,
+    userId: state.auth && state.auth.userInfo ? state.auth.userInfo.uid : null,
     isSignedIn: state.auth.isSignedIn
   }
 }
