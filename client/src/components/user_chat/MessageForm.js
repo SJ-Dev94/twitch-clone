@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import Message from './Message';
 import { database } from '../../firebaseconfig';
+import { connect } from 'react-redux';
 
-export default class MessageForm extends Component {
+class MessageForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      userName: this.props.displayName,
       message: '',
       list: [],
     };
+
     this.messageRef = database.ref().child('messages');
     this.listenMessages();
+
   }
-  componentWillReceiveProps(props) {
-    if (props.user) {
-      this.setState({ 'userName': props.user.displayName });
-    }
-  }
+
   handleChange(e) {
     this.setState({ message: e.target.value });
   }
@@ -31,26 +30,36 @@ export default class MessageForm extends Component {
       this.setState({ message: '' });
     }
   }
+
   handleKeyPress(event) {
     if (event.key !== 'Enter') return;
     this.handleMessageSend();
   }
+
   listenMessages() {
     this.messageRef
       .limitToLast(10)
       .on('value', message => {
+
         this.setState({
-          list: Object.values(message.val()),
+          list: Object.values(message.val())
         });
+        console.log(this.state.list);
       });
+  }
+
+  listMessages = () => {
+    return this.state.list.map((item, index) => {
+
+      return <Message key={index} message={item} />
+
+    });
   }
   render() {
     return (
       <div className="form">
         <div className="form__message">
-          {this.state.list.map((item, index) =>
-            <Message key={index} message={item} />
-          )}
+          {this.listMessages()}
         </div>
         <div className="form__row">
           <input
@@ -72,3 +81,13 @@ export default class MessageForm extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    streams: state.streams,
+    displayName: state.auth && state.auth.userInfo ? state.auth.userInfo.displayName : null,
+    isSignedIn: state.auth.isSignedIn,
+  }
+}
+export default connect(mapStateToProps)(MessageForm);
