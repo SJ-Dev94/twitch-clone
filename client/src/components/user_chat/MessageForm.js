@@ -3,7 +3,8 @@ import Message from './Message';
 import { database } from '../../firebaseconfig';
 import { connect } from 'react-redux';
 
-let result = [];
+
+
 
 class MessageForm extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class MessageForm extends Component {
       list: [],
     };
 
-    this.messageRef = database.ref(`messages`);
+    console.log(this.props.stream);
 
     this.listenMessages();
 
@@ -25,12 +26,14 @@ class MessageForm extends Component {
 
   }
   handleMessageSend() {
-    console.log(this.props.stream[0]);
+    this.messageRef = database.ref(`messages/${this.props.stream}`);
+    let newItem;
+    console.log(this.props.stream);
     if (this.state.message) {
-      var newItem = {
+      newItem = {
         userName: this.state.userName,
         message: this.state.message,
-        streamId: this.props.stream[0]
+        streamId: this.props.stream
       }
       this.messageRef.push(newItem);
       this.setState({ message: '' });
@@ -43,10 +46,10 @@ class MessageForm extends Component {
   }
 
   listenMessages() {
-    console.log(this.props.stream[0])
-    this.messageRef.orderByChild('streamId').limitToLast(10)
+    this.messageRef = database.ref(`messages/${this.props.stream}`);
+    this.messageRef.limitToLast(10)
       .on('value', message => {
-        if (!message) {
+        if (!message.val()) {
           console.log("no message")
         } else {
           this.setState({
@@ -96,9 +99,11 @@ class MessageForm extends Component {
 
 
 const mapStateToProps = (state) => {
+  let result;
   state.streams.forEach((i) => {
-    result.push(i.streamId);
+    result = i.streamId;
   })
+  console.log(result);
   return {
     stream: result,
     isSignedIn: state.auth.isSignedIn,
