@@ -45,9 +45,11 @@ class MessageForm extends Component {
     this.handleMessageSend();
   }
 
+  //currently this does not retrieve any messages. this is your current task.
   listenMessages() {
+    console.log(this.props.stream)
     this.messageRef = database.ref(`messages/${this.props.stream}`);
-    this.messageRef.limitToLast(10)
+    this.messageRef.orderByChild('streamId').limitToLast(10)
       .on('value', message => {
         if (!message.val()) {
           console.log("no message")
