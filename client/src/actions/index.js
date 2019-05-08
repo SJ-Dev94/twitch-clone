@@ -140,7 +140,6 @@ export const fetchStream = (id) =>
   async dispatch => {
     const ref = database.ref("streams");
     const result = [];
-    console.log(result);
     await ref.orderByChild(`title`).equalTo(id).on('value', streamSnapshot => {
       streamSnapshot.forEach(child => {
         const stream = child.val();

@@ -33,7 +33,7 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_OUT:
       return { ...state, userInfo: null, isSignedIn: false, userId: null }
     case ADD_USER_TO_STATE:
-      return { userInfo: action.payload, isSignedIn: true };
+      return { ...state, userInfo: action.payload, isSignedIn: true };
     case UPDATE_USER_STATE:
       return { userInfo: action.payload };
     case UPDATE_USER_PROFILE_PIC:

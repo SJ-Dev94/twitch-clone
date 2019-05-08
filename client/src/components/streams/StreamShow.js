@@ -3,7 +3,7 @@ import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
 import MessageForm from '../user_chat/MessageForm';
-import Message from '../user_chat/Message'
+import Message from '../user_chat/Message';
 
 class StreamShow extends
   React.Component {
@@ -62,7 +62,7 @@ class StreamShow extends
 
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+
   const stream = state.streams[0];
   if (stream) {
     return { stream }

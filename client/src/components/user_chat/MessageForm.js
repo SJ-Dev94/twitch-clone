@@ -3,6 +3,8 @@ import Message from './Message';
 import { database } from '../../firebaseconfig';
 import { connect } from 'react-redux';
 
+let result = [];
+
 class MessageForm extends Component {
   constructor(props) {
     super(props);
@@ -12,19 +14,23 @@ class MessageForm extends Component {
       list: [],
     };
 
-    this.messageRef = database.ref().child('messages');
+    this.messageRef = database.ref(`messages`);
+
     this.listenMessages();
 
   }
 
   handleChange(e) {
     this.setState({ message: e.target.value });
+
   }
   handleMessageSend() {
+    console.log(this.props.stream[0]);
     if (this.state.message) {
       var newItem = {
         userName: this.state.userName,
         message: this.state.message,
+        streamId: this.props.stream[0]
       }
       this.messageRef.push(newItem);
       this.setState({ message: '' });
@@ -37,14 +43,18 @@ class MessageForm extends Component {
   }
 
   listenMessages() {
-    this.messageRef
-      .limitToLast(10)
+    console.log(this.props.stream[0])
+    this.messageRef.orderByChild('streamId').limitToLast(10)
       .on('value', message => {
+        if (!message) {
+          console.log("no message")
+        } else {
+          this.setState({
+            list: Object.values(message.val())
+          })
 
-        this.setState({
-          list: Object.values(message.val())
-        });
-        console.log(this.state.list);
+        }
+
       });
   }
 
@@ -56,7 +66,9 @@ class MessageForm extends Component {
     });
   }
   render() {
-    return (
+    if (!this.props.stream) {
+      return "loading....";
+    } return (
       <div className="form">
         <div className="form__message">
           {this.listMessages()}
@@ -84,10 +96,16 @@ class MessageForm extends Component {
 
 
 const mapStateToProps = (state) => {
+  state.streams.forEach((i) => {
+    result.push(i.streamId);
+  })
   return {
-    streams: state.streams,
-    displayName: state.auth && state.auth.userInfo ? state.auth.userInfo.displayName : null,
+    stream: result,
     isSignedIn: state.auth.isSignedIn,
+    displayName: state.auth && state.auth.userInfo ? state.auth.userInfo.displayName : null
   }
 }
+
+
+
 export default connect(mapStateToProps)(MessageForm);

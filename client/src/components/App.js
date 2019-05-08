@@ -24,7 +24,6 @@ class App extends React.Component {
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.props.addUserInfoToState(user);
-        console.log(user);
       } else {
         console.log('not logged in');
       }
