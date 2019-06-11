@@ -3,7 +3,7 @@ import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
 import MessageForm from '../user_chat/MessageForm';
-import Message from '../user_chat/Message';
+import StreamHeader from './StreamShowComponents/StreamHeader';
 
 class StreamShow extends
   React.Component {
@@ -47,6 +47,7 @@ class StreamShow extends
     const { title, description } = this.props.stream;
     return (
       <div>
+        <StreamHeader />
         <video ref={this.videoRef} style={{ width: '100%' }} controls={true} />
         <h1>{title}</h1>
         <h5>          {description}

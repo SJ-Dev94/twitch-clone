@@ -48,8 +48,6 @@ class MessageForm extends Component {
               list: result
             })
 
-            console.log(this.state.list)
-
           }
         })
 

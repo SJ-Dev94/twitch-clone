@@ -63,13 +63,14 @@ export const createStream = (formValues) => {
   return async (dispatch, getState) => {
     const ref = database.ref("streams");
     const { uid } = getState().auth.userInfo;
+    const { displayName } = getState().auth.userInfo;
 
 
     /* userId: 
     */
     console.log(uid)
     const streamId = uuidv4();
-    const stream = { ...formValues, uid, streamId };
+    const stream = { ...formValues, uid, streamId, displayName };
     await ref.push(stream);
     dispatch({ type: CREATE_STREAM, payload: stream });
 
