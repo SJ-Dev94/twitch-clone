@@ -27,7 +27,7 @@ class StreamFollow extends React.Component {
   constructor(props) {
     super(props);
     this.uid = this.props.uid;
-    this.displayName = this.props.displayName
+    this.displayName = this.props.displayName;
     this.streamCreatorUid = this.props.streamCreatorUid;
     this.streamCreatorDisplayName = this.props.streamCreatorDisplayName;
   }
@@ -47,33 +47,59 @@ class StreamFollow extends React.Component {
     const followerRef = database.ref(`User_Follow_Info/${e}/Follower`)
 
     const followerInfoObject = {
-      uid: this.uid,
-      displayName: this.displayName
+      uid: this.props.uid,
+      displayName: this.props.displayName
     }
+    //use followerRef as the node to check children, then check if child exists, if child doesnt exist, and child != this.signedInUserId (create this), create follow
 
     followerRef.push(followerInfoObject);
+
   }
 
   //creates a following object under the users uid 
-
+  testfunc = () => {
+    return;
+  }
   //Add in checks to see if following object already exists. We can't follow someone multiple times
   createFollowing = (user) => {
     const followingRef = database.ref(`User_Follow_Info/${user}/Following`);
 
     const followingInfoObject = {
-      uid: this.streamCreatorUid,
-      displayName: this.streamCreatorDisplayName
+      uid: this.props.streamCreatorUid,
+      displayName: this.props.streamCreatorDisplayName
     }
 
+    //current position c1as of 8/22/2019: the data model is working properly, with followers and followings going to the right place. now add in your checks to make sure the follow/following does not already exist
+
+    console.log(this.streamCreatorDisplayName)
     //Check to see if follow already exists. 
     /*followingRef.once('value', function (snapshot) {
       if (snapshot.hasChild(DATA HERE)) {
         alert('exists');
       }
     }); */
+    //var isSignedIn = this.isSignedIn;
 
+    //you left off here <----  this is untested
+    /*followingRef.child('Following').orderByChild('uid').equalTo(this.props.uid).on('value', snapshot => {
+
+      console.log(snapshot.val());
+      snapshot.forEach(function (data) {
+        console.log(data.key);
+      });
+
+      console.log(snapshot.val());
+      console.log(this.streamCreatorUid);
+      if (isSignedIn) {
+        console.log(snapshot.val())
+        followingRef.push(followingInfoObject);
+        return
+      } else {
+        return
+      }
+    })
+    */
     followingRef.push(followingInfoObject);
-
   }
 
   //const streamId = uuidv4();
@@ -87,11 +113,11 @@ class StreamFollow extends React.Component {
 
   onSubmit = () => {
     if (this.props.isSignedIn === true) {
-      this.createFollowing(this.uid);
-      this.createFollower(this.streamCreatorUid);
+      this.createFollowing(this.props.uid);
+      this.createFollower(this.props.streamCreatorUid);
     } else {
       //add in a sign in modal if user is not logged in
-      console.log('please sign i ')
+      console.log('please sign in')
     }
   }
 
