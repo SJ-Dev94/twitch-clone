@@ -12,16 +12,16 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="ui secondary pointing menu">
+      <div>
 
 
-        <Link to="/" className="item">
+        <Link to="/">
           <i className="fab fa-twitch"></i>
         </Link>
-        <Link to="/" className="item">
+        <Link to="/">
           Discover
       </Link>
-        <Link to="/" className="item">
+        <Link to="/">
           Following
       </Link>
 
@@ -30,30 +30,30 @@ class Header extends React.Component {
         <SignOutButton />
         <Link to="/signUp">Sign Up</Link>
 
-        <Link to="/" className="item">
+        <Link to="/">
           ...
       </Link>
-        <div className="right menu">
+        <div >
 
-          <div className="item">
-            <div className="ui icon input">
+          <div>
+            <div >
               <input type="text" placeholder="Search..." />
-              <i className="search link icon" />
+              <i />
 
             </div>
           </div>
 
-          <div className="ui compact menu">
-            <div className="ui simple dropdown item">
+          <div >
+            <div>
               <img src={this.props.userAvi} alt="User AVI"></img>
               <p>{this.props.displayName}</p>
-              <i className="dropdown icon"></i>
-              <div className="menu">
-                <div className="item">Channel</div>
-                <div className="item">Dashboard</div>
-                <div className="item">Friends</div>
-                <Link to="settings/profile" className="item">Settings</Link>
-                <div className="item"><GoogleAuth /></div>
+              <i ></i>
+              <div >
+                <div>Channel</div>
+                <div>Dashboard</div>
+                <div>Friends</div>
+                <Link to="settings/profile">Settings</Link>
+                <div><GoogleAuth /></div>
               </div>
             </div>
           </div>
