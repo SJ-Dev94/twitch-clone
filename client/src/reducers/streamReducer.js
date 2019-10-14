@@ -1,25 +1,25 @@
-import _ from 'lodash'
+import _ from 'lodash';
 import {
   FETCH_STREAM,
   FETCH_STREAMS,
   CREATE_STREAM,
   EDIT_STREAM,
-  DELETE_STREAM
+  DELETE_STREAM,
 } from '../actions/types';
 
-export default (state = {}, action) => {
-  switch (action.type){
+export default (state = [], action) => {
+  switch (action.type) {
     case FETCH_STREAMS:
-      return {...state, ..._.mapKeys(action.payload, 'id')};
+      return action.streams;
     case FETCH_STREAM:
-      return {...state, [action.payload.id]: action.payload};
+      return action.streams;
     case CREATE_STREAM:
-      return {...state, [action.payload.id]: action.payload};
+      return [...state, action.payload];
     case EDIT_STREAM:
-      return {...state, [action.payload.id]: action.payload};
+      return [...state, action.payload];
     case DELETE_STREAM:
-      return _.omit(state, action.payload);
-    default: 
+      return _.filter(state, action.payload);
+    default:
       return state;
   }
 }

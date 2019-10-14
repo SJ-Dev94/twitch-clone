@@ -2,17 +2,18 @@ import React from "react";
 import flv from 'flv.js';
 import { connect } from 'react-redux';
 import { fetchStream } from '../../actions';
+import MessageForm from '../user_chat/MessageForm';
+import StreamHeader from './StreamShowComponents/StreamHeader';
 
-class StreamShow extends 
-React.Component {
-  constructor(props){
+class StreamShow extends
+  React.Component {
+  constructor(props) {
     super(props);
     this.videoRef = React.createRef();
   }
-  
-  componentDidMount(){
-    const {id} = this.props.match.params
-    
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
     this.props.fetchStream(id);
     this.buildPlayer();
   }
@@ -21,7 +22,7 @@ React.Component {
     this.buildPlayer();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.player.destroy();
   }
 
@@ -39,22 +40,38 @@ React.Component {
     this.player.load();
   }
 
-  render(){
-    if (!this.props.stream){
+  render() {
+    if (!this.props.stream) {
       return <div>Loading...</div>
     }
+    const { title, description } = this.props.stream;
     return (
       <div>
-        <video ref={this.videoRef} style={{width: '100%'}} controls={true} />
-        <h1> {this.props.stream.title}</h1>
-        <h5>          {this.props.stream.description}
+        <StreamHeader />
+        <video ref={this.videoRef} style={{ width: '100%' }} controls={true} />
+        <h1>{title}</h1>
+        <h5>          {description}
         </h5>
+
+        <MessageForm />
+
       </div>
+
     )
   }
 }
 
+
 const mapStateToProps = (state, ownProps) => {
-  return { stream: state.streams[ownProps.match.params.id]}
+
+  const stream = state.streams[0];
+  if (stream) {
+    return { stream }
+  } else {
+    return { stream: {} }
+  }
+
 }
-export default connect(mapStateToProps, {fetchStream})(StreamShow);
+
+
+export default connect(mapStateToProps, { fetchStream })(StreamShow);

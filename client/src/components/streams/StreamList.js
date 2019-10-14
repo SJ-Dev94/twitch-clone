@@ -1,34 +1,37 @@
 import React from "react";
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import {fetchStreams} from '../../actions'
+import { fetchStreams } from '../../actions';
+import { result } from '../../actions';
 
 class StreamList extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchStreams();
   }
 
-  renderAdmin(stream){
-    if (stream.userId === this.props.currentUserId) {
+  renderAdmin(stream) {
+    if (stream.uid === this.props.currentUserId) {
       return (
         <div className="right floated content">
-          <Link className="ui button primary" to={`streams/edit/${stream.id}`}>Edit</Link>
-          <Link to={`/streams/delete/${stream.id}`} className="ui button negative">
+          <Link className="ui button primary" to={`streams/edit/${stream.title}`}>Edit</Link>
+          <Link to={`/streams/delete/${stream.title}`} className="ui button negative">
             Delete
           </Link>
         </div>
       )
     }
   }
-  
-  renderList(){
+
+  renderList() {
+
     return this.props.streams.map(stream => {
       return (
-        <div className="item" key={stream.id}>
+        <div className="item" key={stream.streamId}>
           {this.renderAdmin(stream)}
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/${stream.id}`} className="header">
+            <Link to={`/streams/${stream.title}`} className="header">
               {stream.title}
             </Link>
             <div className="description">{stream.description}</div>
@@ -36,12 +39,12 @@ class StreamList extends React.Component {
         </div>
       );
     })
-  } 
+  }
 
-  renderCreate(){
+  renderCreate() {
     if (this.props.isSignedIn) {
       return (
-        <div style={{textAlign: 'right'}}>
+        <div style={{ textAlign: 'right' }}>
           <Link to="/streams/new" className="ui button primary">
             Create Stream
           </Link>
@@ -50,7 +53,7 @@ class StreamList extends React.Component {
     }
   }
 
-  render(){
+  render() {
     return (
       <div>
         <h2>Streams</h2>
@@ -63,10 +66,9 @@ class StreamList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    streams: Object.values(state.streams),
-    currentUserId: state.auth.userId,
-    isSignedIn: state.auth.isSignedIn
+    streams: state.streams,
+    currentUserId: state.auth && state.auth.userInfo ? state.auth.userInfo.uid : null,
+    isSignedIn: state.auth.isSignedIn,
   }
 }
-
-export default connect(mapStateToProps, {fetchStreams})(StreamList);
+export default connect(mapStateToProps, { fetchStreams })(StreamList);

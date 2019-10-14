@@ -5,27 +5,28 @@ import { fetchStream, editStream } from '../../actions';
 import StreamForm from './StreamForm';
 
 class StreamEdit extends React.Component {
-  componentDidMount(){
-  this.props.fetchStream(this.props.match.params.id);
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.fetchStream(id);
   }
 
   onSubmit = (formValues) => {
-    this.props.editStream(this.props.match.params.id, formValues);
+    const { id } = this.props.match.params;
+    this.props.editStream(id, formValues);
   }
-  
-  render() { 
-    console.log(this.props)
-    if(!this.props.stream){
+
+  render() {
+    if (!this.props.stream) {
       return <div>Loading...</div>
     }
-    
+
     return (
       <div>
         <h3>
           Edit a Stream
         </h3>
-          <StreamForm 
-          initialValues={_.pick(this.props.stream, 'title', 'description')} 
+        <StreamForm
+          initialValues={_.pick(this.props.stream, 'title', 'description')}
           onSubmit={this.onSubmit} />
       </div>
     );
@@ -33,6 +34,6 @@ class StreamEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return {stream: state.streams[ownProps.match.params.id] }
+  return { stream: state.streams[0] }
 }
 export default connect(mapStateToProps, { fetchStream, editStream })(StreamEdit);
