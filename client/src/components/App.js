@@ -14,6 +14,7 @@ import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
 import Header from './Header';
 import history from '../history';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends React.Component {
