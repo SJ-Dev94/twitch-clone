@@ -71,26 +71,19 @@ class Header extends React.Component {
         <Link to="/">
           Following
       </Link>
-
         <Link to="/signIn">Log In</Link>
-
         <SignOutButton />
         <Link to="/signUp">Sign Up</Link>
-
         <Link to="/">
           ...
       </Link>
-
         <div >
-
           <div>
             <div >
               <input type="text" placeholder="Search..." />
               <i />
-
             </div>
           </div>
-
           <div >
             <div>
               <img src={this.props.userAvi} alt="User AVI"></img>

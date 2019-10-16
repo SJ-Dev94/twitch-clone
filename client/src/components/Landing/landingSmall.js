@@ -2,50 +2,37 @@ import React from "react";
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchStreams } from '../../actions';
+import { fetchCategories } from './LandingHelpers/fetchCategories.js';
 import { result } from '../../actions';
 
-class StreamList extends React.Component {
+export default class LandingSmall extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { username: undefined }
-    this.props.fetchStreams();
+    this.state = { categories: fetchCategories() };
   }
 
-  componentDidMount() {
-    this.props.fetchStreams();
-  }
 
-  renderAdmin(stream) {
-    if (stream.uid === this.props.currentUserId) {
-      return (
-        <div className="right floated content">
-          <Link className="ui button primary" to={`streams/edit/${stream.title}`}>Edit</Link>
-          <Link to={`/streams/delete/${stream.title}`} className="ui button negative">
-            Delete
-          </Link>
-        </div>
-      )
-    }
-  }
-
+  //left off trying to render this list
   renderList() {
 
-    return this.props.streams.map(stream => {
-      return (
-        <div className="item" key={stream.streamId}>
-          {this.renderAdmin(stream)}
-          <i className="large middle aligned icon camera" />
+    return Object.keys(this.state).map(category =>
+      category.map(i => {
+        console.log(i);
+        return (< div className="item" key={category.title} >
+          {console.log(this.state)}
+          < i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/${stream.title}`} className="header">
-              {stream.title}
+            <Link to={`/streams/${category.title}`} className="header">
+              {category.title}
             </Link>
-            <div className="description">{stream.description}</div>
+            <div className="description">{category.description}</div>
           </div>
-        </div>
-      );
-    })
+        </div >
+        )
+      })
+    );
   }
+
 
   renderCreate() {
     if (this.props.isSignedIn) {
@@ -63,18 +50,9 @@ class StreamList extends React.Component {
     return (
       <div>
         <h2>Streams</h2>
-        <div className="ui celled list">{this.renderList()}</div>
-        {this.renderCreate()}
+        <div>{this.renderList()}</div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    streams: state.streams,
-    currentUserId: state.auth && state.auth.userInfo ? state.auth.userInfo.uid : null,
-    isSignedIn: state.auth.isSignedIn,
-  }
-}
-export default connect(mapStateToProps, { fetchStreams })(StreamList);

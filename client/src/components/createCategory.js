@@ -1,6 +1,6 @@
 import { database } from '../firebaseconfig.js';
 
-//Run this once and delete the function call. This is just to create an object for each category in the database. 
+//Run this once and delete the function call. This is just to create and store our objects for each category in the database. 
 
 
 export const createCategory = async () => {
