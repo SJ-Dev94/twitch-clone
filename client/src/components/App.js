@@ -9,12 +9,14 @@ import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
+import Landing from './Landing/landingIndex'
 import UserSettingsPage from './user_pages/UserSettings'
 import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
 import Header from './Header';
 import history from '../history';
 import debounce from 'lodash.debounce';
+import { createCategory } from './createCategory';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -22,6 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    createCategory();
 
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -54,7 +57,7 @@ class App extends React.Component {
           <div>
             <Header />
             <Switch>
-              <Route path="/" exact component={StreamList} />
+              <Route path="/" exact component={Landing} />
               <Route path="/streams/new" exact component={StreamCreate} />
               <Route path="/streams/edit/:id" exact component={StreamEdit} />
               <Route path="/streams/delete/:id" exact component={StreamDelete} />
