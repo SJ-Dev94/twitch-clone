@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { auth } from '../firebaseconfig'
-import { addUserInfoToState, signIn } from '../actions/index'
+import { addUserInfoToState, signIn, updateWindowSize } from '../actions/index'
 import StreamCreate from './streams/StreamCreate';
 import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
@@ -14,6 +14,7 @@ import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
 import Header from './Header';
 import history from '../history';
+import debounce from 'lodash.debounce';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -32,6 +33,19 @@ class App extends React.Component {
 
     })
   }
+
+  componentDidMount() {
+
+    this.props.updateWindowSize(window.innerWidth);
+
+    window.addEventListener(
+      "resize",
+      debounce(() => {
+        this.props.updateWindowSize(window.innerWidth);
+      }, 200)
+    );
+  }
+
 
   render() {
     return (
@@ -56,5 +70,5 @@ class App extends React.Component {
   }
 };
 const mapStateToProps = null;
-export default connect(mapStateToProps, { addUserInfoToState, signIn })(App);
+export default connect(mapStateToProps, { addUserInfoToState, signIn, updateWindowSize })(App);
 

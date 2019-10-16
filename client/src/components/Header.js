@@ -11,31 +11,11 @@ import { Navbar, Nav, Dropdown, NavDropdown, Form, FormControl, Button, Image } 
 
 //add js to change ui based on user login
 
-const UserAviDisplay = () => {
-  return (
-    <Image src={this.props.userAvi} roundedCircle><Nav.Dropdown></Nav.Dropdown></Image>
-  )
-}
-
-
-const LoginButtonRender = (e) => {
-  return (
-    <Nav.Link href="" onClick={e} >Login</Nav.Link>
-  )
-}
-
-
-
-const SignUpButtonRender = () => {
-  return (
-    <Nav.Link href="#home" >Signup</Nav.Link>
-  )
-}
-
 class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = { showModal: false }
+    this.modalState = this.state.showModal;
   }
 
   toggleModalShow = () => {
@@ -46,26 +26,25 @@ class Header extends React.Component {
     }
   }
 
-  LoginButtonRender = (props) => {
+  /*LoginButtonRender = (props) => {
     return (
       <Nav.Link href="" onClick={props.onClick} >Login</Nav.Link>
     )
+  }*/
+
+
+
+  changeModalState = () => {
+    if (!this.modalState) {
+      this.setState({ showModal: true })
+    } else {
+      this.setState({ showModal: false })
+    }
+
   }
 
 
   render() {
-    const modalState = this.state.showModal;
-
-
-    const changeModalState = () => {
-      if (!modalState) {
-        this.setState({ showModal: true })
-      } else {
-        this.setState({ showModal: false })
-      }
-
-    }
-
     return (
       <div>
         <Navbar bg="light" expand="lg" fixed="top">
@@ -76,8 +55,8 @@ class Header extends React.Component {
               <Nav.Link href="#home">Discover</Nav.Link>
               <Nav.Link href="#link">Following</Nav.Link>
             </Nav>
-            <SignInModal show={this.state.showModal} />
-            <Nav.Link href="#home" onClick={changeModalState}>Login</Nav.Link>
+            <SignInModal show={this.state.showModal} onHide={this.changeModalState} />
+            <Nav.Link href="#home" onClick={this.changeModalState}>Login</Nav.Link>
             <Nav.Link href="#home">Sign Up</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
