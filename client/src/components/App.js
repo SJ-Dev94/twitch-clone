@@ -18,6 +18,7 @@ import history from '../history';
 import debounce from 'lodash.debounce';
 import { createCategory } from './createCategory';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
 
 
 class App extends React.Component {
@@ -50,7 +51,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="ui container" >
+      <div>
         <Router history={history}>
           <div>
             <Header />
@@ -66,8 +67,9 @@ class App extends React.Component {
             </Switch>
           </div>
         </Router>
+
       </div>
-    );
+    )
   }
 };
 const mapStateToProps = null;
