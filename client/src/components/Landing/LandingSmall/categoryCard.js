@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { database } from '../../firebaseconfig.js';
+import { database } from '../../../firebaseconfig.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -35,7 +35,7 @@ export default class SmallColumn extends React.Component {
   }
   renderCard() {
     return (
-      <Card style={{ width: "12rem" }}>
+      <Card>
         <Card.Img variant="top" src={this.props.img} />
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>

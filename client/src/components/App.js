@@ -9,7 +9,7 @@ import StreamDelete from './streams/StreamDelete';
 import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
-import LandingSmall from '../components/Landing/landingSmall'
+import LandingSmall from './Landing/LandingSmall/landingSmall'
 import UserSettingsPage from './user_pages/UserSettings'
 import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
@@ -50,24 +50,28 @@ class App extends React.Component {
 
 
   render() {
+    const divStyle = {
+      paddingTop: '65px'
+    };
     return (
       <div>
         <Router history={history}>
           <div>
             <Header />
-            <Switch>
-              <Route path="/" exact component={LandingSmall} />
-              <Route path="/streams/new" exact component={StreamCreate} />
-              <Route path="/streams/edit/:id" exact component={StreamEdit} />
-              <Route path="/streams/delete/:id" exact component={StreamDelete} />
-              <Route path="/streams/:id" exact component={StreamShow} />
-              <Route path="/settings/profile" exact component={UserSettingsPage} />
-              <Route path="/signIn" exact component={UserSignIn} />
-              <Route path="/signUp" exact component={UserSignUp} />
-            </Switch>
+            <div style={{ divStyle }}>
+              <Switch>
+                <Route path="/" exact component={LandingSmall} />
+                <Route path="/streams/new" exact component={StreamCreate} />
+                <Route path="/streams/edit/:id" exact component={StreamEdit} />
+                <Route path="/streams/delete/:id" exact component={StreamDelete} />
+                <Route path="/streams/:id" exact component={StreamShow} />
+                <Route path="/settings/profile" exact component={UserSettingsPage} />
+                <Route path="/signIn" exact component={UserSignIn} />
+                <Route path="/signUp" exact component={UserSignUp} />
+              </Switch>
+            </div>
           </div>
         </Router>
-
       </div>
     )
   }
