@@ -12,6 +12,7 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import CardGroup from 'react-bootstrap/CardGroup'
 import chunk from 'lodash/chunk';
 
+
 class LandingSmall extends React.Component {
   constructor(props) {
     super(props)
@@ -145,12 +146,19 @@ class LandingSmall extends React.Component {
    </div>
   </Col> */
   renderSm() {
+    const myRow = {
+      border: '3px solid red',
+    }
+
+    const myCol = {
+      border: '3px dashed blue'
+    }
     return (
-      <Row className="h-100">
+      <Row className='no-gutters'>
         {this.state.categories.map((category, index) => {
           return (
-            <Col xs={12} sm={6} md={6}>
-              <CategoryCard title={category.title} key={category.id} img={category.thumbnailURL} />
+            <Col className="" xs={6} sm={6} md={3}>
+              <CategoryCard title={category.title} key={category.id} sizes={category.sizes} srcSet={category.srcSet} img={category.src} />
             </Col>
           )
         })}
@@ -191,72 +199,17 @@ class LandingSmall extends React.Component {
   }
 
   render() {
-    const divStyle = {
-      paddingTop: '65px'
-    };
-    const isSmall = this.state.small;
+    const myContainer = {
+      border: '1px solid green',
+    }
     return (
-      <Container style={{ divStyle }}>
-        {this.renderSm()}
-      </Container>
+
+      this.renderSm()
+
 
     );
   }
-  /*else {
-return (
-  <Container>
-    <Row>
-      <Col>
-        <CardGroup>
-          <CategoryCard title={category.title} key={category.id} img={category.thumbnailURL} />
-          {console.log(category)}
-        </CardGroup>
-      </Col>
-    </Row>
-  </Container >
-);
-}
-  }
 
-  )
-}
-*/
-
-
-  /*render() {
-    if (this.props.windowSize < 600) {
-      return (
-        <div>
-          <h2>Streams</h2>
-          <div>
-            <Container>
-              <Row>
-                <Col>
-                  <CardGroup>
-                    <CategoryCard title={category[0].title} key={category[0].id} img={category[0].thumbnailURL} />
-                    {console.log(category)}
-                  </CardGroup>
-                </Col>
-                <Col >
-                  <CardGroup>
-                    <CategoryCard title={category[1].title} key={category[1].id} img={category[1].thumbnailURL} />
-                  </CardGroup>
-                </Col>
-              </Row>
-            </Container>
-            );
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <h2>Streams</h2>
-          <div>{this.renderCategoryMd()}</div>
-        </div>
-      )
-    }
-  } */
 }
 
 const mapStateToProps = (state) => {

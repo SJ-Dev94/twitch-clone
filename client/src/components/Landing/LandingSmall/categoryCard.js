@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 
+
 export default class SmallColumn extends React.Component {
 
   componentDidMount() {
@@ -34,18 +35,35 @@ export default class SmallColumn extends React.Component {
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   }
   renderCard() {
+    const titleStyle = {
+      fontSize: ".8rem"
+    }
+    const myCard = {
+      border: '1px solid yellow',
+    }
+
+    const hunna = {
+      height: '100%'
+    }
+
+    const fiddy = {
+
+    }
     return (
-      <Card>
-        <Card.Img variant="top" src={this.props.img} />
+      <Card style={fiddy}>
+        <Card.Img style={hunna} variant="top" sizes={this.props.sizes} srcSet={this.props.srcSet} src={this.props.img} />
         <Card.Body>
-          <Card.Title>{this.props.title}</Card.Title>
-          <Card.Text>
+          <Card.Title style={titleStyle}>
+            <strong>{this.props.title}</strong></Card.Title>
+          <Card.Text className='text-truncate'>
             {this.getRandomInt()}k viewers
           </Card.Text>
         </Card.Body>
       </Card>
     )
   }
+
+ 
 
   render() {
     return (

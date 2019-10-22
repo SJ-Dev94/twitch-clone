@@ -58,7 +58,7 @@ class App extends React.Component {
         <Router history={history}>
           <div>
             <Header />
-            <div style={{ divStyle }}>
+            <div>
               <Switch>
                 <Route path="/" exact component={LandingSmall} />
                 <Route path="/streams/new" exact component={StreamCreate} />
