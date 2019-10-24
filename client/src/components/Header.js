@@ -6,6 +6,7 @@ import { auth } from '../firebaseconfig';
 import { signIn, signOut, addUserInfoToState } from '../actions'
 import SignOutButton from './user_pages/UserSignOut';
 import SignInModal from './user_pages/SignInModal'
+import UserSignUpModal from './user_pages/UserSignUpModal'
 
 import { Navbar, Nav, Dropdown, NavDropdown, Form, FormControl, Button, Image } from 'react-bootstrap'
 
@@ -14,7 +15,8 @@ import { Navbar, Nav, Dropdown, NavDropdown, Form, FormControl, Button, Image } 
 class Header extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { showModal: false }
+    this.state = { showModal: false,
+                  showSignUpModal: false}
     this.modalState = this.state.showModal;
   }
 
@@ -56,8 +58,9 @@ class Header extends React.Component {
               <Nav.Link href="#link">Following</Nav.Link>
             </Nav>
             <SignInModal show={this.state.showModal} onHide={this.changeModalState} />
+            <UserSignUpModal show={this.state.showModal} onHide={this.changeModalState} />
             <Nav.Link href="#home" onClick={this.changeModalState}>Login</Nav.Link>
-            <Nav.Link href="#home">Sign Up</Nav.Link>
+            <Nav.Link onClick={this.changeModalState} href="#home">Sign Up</Nav.Link>
           </Navbar.Collapse>
         </Navbar>
 

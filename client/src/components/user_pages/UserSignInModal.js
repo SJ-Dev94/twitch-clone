@@ -86,7 +86,7 @@ class UserSignInModal extends React.Component {
 
     const isInvalid = password === '' || email === '';
 
-    return ReactDOM.createPortal(
+    return (
       <div onClick={this.onDismiss} >
         <div onClick={(e) => e.stopPropagation()} >
           <MyVerticallyCenteredModal />
@@ -111,8 +111,7 @@ class UserSignInModal extends React.Component {
           </form>
     */}
         </div>
-      </div>,
-      document.querySelector('#modal')
+      </div>
     );
   }
 

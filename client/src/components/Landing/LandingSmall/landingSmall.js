@@ -26,22 +26,7 @@ class LandingSmall extends React.Component {
 
   async componentDidMount() {
     await this.fetchCategories();
-    this.setSmallState();
   }
-
-  setSmallState() {
-    if (this.props.windowSize < 600) {
-      this.setState({ small: true })
-    } else {
-      this.setState({ small: false });
-    }
-  }
-  /*static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.windowSize !== prevState.windowSize) {
-      return { list: nextProps.externalList };
-    }
-    else return null; // Triggers no change in the state
-  } */
 
   chunkArray = (myArray, chunk_size) => {
     let results = [];
@@ -53,35 +38,6 @@ class LandingSmall extends React.Component {
     return results;
   }
 
-  determineArrayState = () => {
-    if (this.props.windowSize < 600) {
-      this.twoColumnArray(this.result);
-      console.log(this.state)
-      console.log(this.props.windowSize);
-    } else {
-      this.setState(this.result);
-    }
-  }
-
-  twoColumnArray = (x) => {
-    const splitArray = chunk(x, 2);
-    this.setState({ categories: splitArray });
-  }
-
-
-
-  //takes infinite number of objects in an array and splits into a multidimensional array of x length
-  xColumnArray = (x) => {
-    const splitArray = chunk(x, 1);
-    this.setState({ categories: splitArray });
-  }
-
-  // Usage
-
-  // Split in group of 3 items
-  //var result = chunkArray([1, 2, 3, 4, 5, 6, 7, 8], 3)
-
-  // Outputs : [ [1,2,3] , [4,5,6] ,[7,8] ]
 
 
 
@@ -98,53 +54,7 @@ class LandingSmall extends React.Component {
   };
 
 
-  renderCategorySm = () => {
-    return this.state.categories.map((category, index) => {
-      return (
-        <Container>
-          <Row>
-            <Col>
-              <CardGroup>
-                <CategoryCard title={category[0].title} key={category[0].id} img={category[0].thumbnailURL} />
-                {console.log(category)}
-              </CardGroup>
-            </Col>
-            <Col >
-              <CardGroup>
-                <CategoryCard title={category[1].title} key={category[1].id} img={category[1].thumbnailURL} />
-              </CardGroup>
-            </Col>
-          </Row>
-        </Container>
-      );
-    }
-
-    )
-  }
-
-
-  /* return(
-           <Container>
-   <Row>
-     <Col>
-       <CardGroup>
-         <CategoryCard title={category[0].title} key={category[0].id} img={category[0].thumbnailURL} />
-       </CardGroup>
-     </Col>
-   </Row>
-           </Container >
-         ); */
-
-  /* <Col>
-   <div key={category.id}>
-     <div>
-       <Link to={`/streams/${category.title}`}>
-         {category.title}
-       </Link>
-       <div>{category.tag}</div>
-     </div>
-   </div>
-  </Col> */
+  
   renderSm() {
     const myRow = {
       border: '3px solid red',
@@ -153,8 +63,13 @@ class LandingSmall extends React.Component {
     const myCol = {
       border: '3px dashed blue'
     }
+    const pad = {
+      padding: 'calc( (100vw - env(safe-area-inset-left) - env(safe-area-inset-right)) * 0.01)'
+    }
+
     return (
-      <Row className='no-gutters'>
+      <div style={pad}>
+         <Row className='no-gutters'>
         {this.state.categories.map((category, index) => {
           return (
             <Col className="" xs={6} sm={6} md={3}>
@@ -163,6 +78,7 @@ class LandingSmall extends React.Component {
           )
         })}
       </Row>
+      </div>
     );
   }
 

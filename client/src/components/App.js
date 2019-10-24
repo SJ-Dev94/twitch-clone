@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
-import { auth } from '../firebaseconfig'
+import { auth, providers } from '../firebaseconfig'
 import { addUserInfoToState, signIn, updateWindowSize } from '../actions/index'
 import StreamCreate from './streams/StreamCreate';
 import StreamDelete from './streams/StreamDelete';

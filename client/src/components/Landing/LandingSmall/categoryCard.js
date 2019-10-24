@@ -11,23 +11,9 @@ import Button from 'react-bootstrap/Button'
 
 export default class SmallColumn extends React.Component {
 
-  componentDidMount() {
-  }
-
-
-
-  renderColumn() {
-    return (
-      <div key={this.props.id}>
-        <div>
-          <Link to={`/streams/${this.props.title}`}>
-            {this.props.title}
-          </Link>
-          <div>{this.props.tag}</div>
-        </div>
-      </div>
-    )
-  }
+ truncate(str) {
+    return str.length > 17 ? str.substring(0, 14) + "..." : str;
+  } 
 
   getRandomInt = (min, max) => {
     min = Math.ceil(min);
@@ -46,16 +32,22 @@ export default class SmallColumn extends React.Component {
       height: '100%'
     }
 
-    const fiddy = {
+    const margins = {
+      margin: '0px 4px 7px 4px'
+    }
 
+    const truncate = {
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     }
     return (
-      <Card style={fiddy}>
+      <Card style={margins} className='h-100'>
         <Card.Img style={hunna} variant="top" sizes={this.props.sizes} srcSet={this.props.srcSet} src={this.props.img} />
         <Card.Body>
-          <Card.Title style={titleStyle}>
-            <strong>{this.props.title}</strong></Card.Title>
-          <Card.Text className='text-truncate'>
+          <Card.Title className='' style={titleStyle}>
+            <strong>{this.truncate(this.props.title)}</strong></Card.Title>
+          <Card.Text>
             {this.getRandomInt()}k viewers
           </Card.Text>
         </Card.Body>
@@ -73,4 +65,3 @@ export default class SmallColumn extends React.Component {
     )
   }
 }
-
