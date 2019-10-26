@@ -10,6 +10,7 @@ import StreamEdit from './streams/StreamEdit';
 import StreamList from './streams/StreamList';
 import StreamShow from './streams/StreamShow';
 import LandingSmall from './Landing/LandingSmall/landingSmall'
+import LandingIndex from './Landing/LandingIndex'
 import UserSettingsPage from './user_pages/UserSettings'
 import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
@@ -60,7 +61,7 @@ class App extends React.Component {
             <Header />
             <div>
               <Switch>
-                <Route path="/" exact component={LandingSmall} />
+                <Route path="/" exact component={LandingIndex} />
                 <Route path="/streams/new" exact component={StreamCreate} />
                 <Route path="/streams/edit/:id" exact component={StreamEdit} />
                 <Route path="/streams/delete/:id" exact component={StreamDelete} />

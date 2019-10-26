@@ -2,18 +2,14 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { database } from '../../../firebaseconfig.js';
-import Container from 'react-bootstrap/Container';
+import Sidebar from './sidebar.js'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button';
-import CategoryCard from './categoryCard.js';
-import CardDeck from 'react-bootstrap/CardDeck'
-import CardGroup from 'react-bootstrap/CardGroup'
-import chunk from 'lodash/chunk';
+import CategoryCard from '../LandingSmall/categoryCard.js';
 
 
-class LandingSmall extends React.Component {
+
+class LandingLarge extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -55,24 +51,17 @@ class LandingSmall extends React.Component {
 
 
 
-  renderSm() {
-    const myRow = {
-      border: '3px solid red',
-    }
-
-    const myCol = {
-      border: '3px dashed blue'
-    }
-    const pad = {
-      padding: 'calc( (100vw - env(safe-area-inset-left) - env(safe-area-inset-right)) * 0.01)'
-    }
-
+  renderLarge() {
     return (
-      <div style={pad}>
+      <div>
         <Row className='no-gutters'>
+          <Col>
+            <Sidebar />
+          </Col>
           {this.state.categories.map((category, index) => {
             return (
-              <Col className="" xs={6} sm={6} md={3}>
+
+              <Col className="">
                 <CategoryCard title={category.title} key={category.id} sizes={category.sizes} srcSet={category.srcSet} img={category.src} />
               </Col>
             )
@@ -88,12 +77,11 @@ class LandingSmall extends React.Component {
 
 
   render() {
-    const myContainer = {
-      border: '1px solid green',
-    }
     return (
+      <div>
 
-      this.renderSm()
+        {this.renderLarge()}
+      </div>
 
 
     );
@@ -105,4 +93,4 @@ const mapStateToProps = (state) => {
   return { windowSize: state.windowSize };
 }
 
-export default connect(mapStateToProps)(LandingSmall);
+export default connect(mapStateToProps)(LandingLarge);
