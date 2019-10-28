@@ -78,7 +78,7 @@ class LandingSmall extends React.Component {
             )
           })}
         </Row>
-      </div>
+      </div >
     );
   }
 

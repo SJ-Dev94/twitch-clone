@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { database } from '../../../firebaseconfig.js';
-import Sidebar from './sidebar.js'
+import Sidebar from './Sidebar.js'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import CategoryCard from '../LandingSmall/categoryCard.js';
+import LargeCategoryCard from './LargeCategoryCard.js';
 
 
 
@@ -52,22 +52,49 @@ class LandingLarge extends React.Component {
 
 
   renderLarge() {
+    const color = {
+      backgroundColor: 'red'
+    }
+    const height = {
+      height: '100vh'
+    }
+
+    const width = {
+      width: '40vw'
+    }
+
+    const hunnawidth = {
+      width: '100vw'
+    }
+
+    const wrapper = {
+      display: 'flex',
+      height: '100vh',
+      backgroundColor: 'red'
+    }
+
+    const pad = {
+      padding: 'calc( (100vw - env(safe-area-inset-left) - env(safe-area-inset-right)) * 0.01)',
+      border: '1px dotted yellow'
+    }
+
+
+
+
     return (
-      <div>
-        <Row className='no-gutters'>
-          <Col>
-            <Sidebar />
-          </Col>
+      <div style={wrapper}>
+        <Sidebar />
+        <Row className='no-gutters h-100' style={pad}>
           {this.state.categories.map((category, index) => {
             return (
 
-              <Col className="">
-                <CategoryCard title={category.title} key={category.id} sizes={category.sizes} srcSet={category.srcSet} img={category.src} />
+              <Col>
+                <LargeCategoryCard title={category.title} key={category.id} img={category.src} />
               </Col>
             )
           })}
         </Row>
-      </div>
+      </div >
     );
   }
 
