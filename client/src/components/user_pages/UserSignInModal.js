@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import history from '../../history';
 import { fb, auth } from '../../firebaseconfig';
-import { signIn, signOut, addUserInfoToState } from '../../actions'
-
+import { signIn, signOut, addUserInfoToState } from '../../actions';
+import { Button, Modal, ModalDialog, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap'
 
 const currentUser = auth.currentUser;
 
@@ -13,6 +13,36 @@ const INITIAL_STATE = {
   password: '',
   error: null,
 };
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Centered Modal</h4>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+          consectetur ac, vestibulum at eros.
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+
 class UserSignInModal extends React.Component {
   constructor(props) {
     super(props)
@@ -44,6 +74,8 @@ class UserSignInModal extends React.Component {
     history.push('/');
   }
 
+
+
   render() {
 
     const {
@@ -54,10 +86,11 @@ class UserSignInModal extends React.Component {
 
     const isInvalid = password === '' || email === '';
 
-    return ReactDOM.createPortal(
-      <div onClick={this.onDismiss} className="ui dimmer modals visible active" >
-        <div onClick={(e) => e.stopPropagation()} className="ui standard modal visible active">
-          <form onSubmit={this.onSubmit}>
+    return (
+      <div onClick={this.onDismiss} >
+        <div onClick={(e) => e.stopPropagation()} >
+          <MyVerticallyCenteredModal />
+          {/*<form onSubmit={this.onSubmit}>
             <input
               name="email"
               value={email}
@@ -76,9 +109,9 @@ class UserSignInModal extends React.Component {
 
             {error && <p>{error.message}</p>}
           </form>
+    */}
         </div>
-      </div>,
-      document.querySelector('#modal')
+      </div>
     );
   }
 

@@ -97,8 +97,6 @@ export const fetchStreams = () =>
   }
 
 
-
-
 export const updateUserProfilePicAction = (img) => ({
   type: UPDATE_USER_PROFILE_PIC,
   payload: img
@@ -185,4 +183,10 @@ export const deleteStream = (id) => async dispatch => {
     dispatch(deleteStreamAction(result));
   });
   history.push('/');
-} 
+}
+
+
+export const updateWindowSize = width => dispatch => {
+  dispatch({ type: "UPDATING_WINDOW_SIZE", width });
+};
+
