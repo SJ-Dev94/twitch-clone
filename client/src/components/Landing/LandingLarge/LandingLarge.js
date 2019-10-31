@@ -18,7 +18,7 @@ class LandingLarge extends React.Component {
       small: false
     };
     this.result = [];
-
+    //test
   }
 
   async componentDidMount() {
