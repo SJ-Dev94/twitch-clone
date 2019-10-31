@@ -14,7 +14,7 @@ class LandingIndex extends React.Component {
   }
 
   renderIndex = () => {
-    if (this.props.windowSize > 900) {
+    if (this.props.windowSize > 700) {
       console.log('large screen')
       return <LandingLarge />;
     } else {

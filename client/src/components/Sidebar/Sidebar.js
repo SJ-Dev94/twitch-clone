@@ -26,14 +26,20 @@ export default class Sidebar extends Component {
   }
   render() {
     const sidebarWrapper = {
-      display: 'flex',
-      width: '3.5rem',
-      flexDirection: 'column',
-      border: '1px dotted blue',
-      marginRight: '1rem'
+      flex: '0 0 180px',
+      minHeight: '100%',
+      width: '200px',
+      background: '#fff',
+      border: '2px solid pink',
+      top: '0rem',
+    }
+
+    const sticky = {
+      position: 'sticky',
+      top: '0rem',
     }
     return <div style={sidebarWrapper}>
-      <div className="sidebar-icon">
+      <div className="sidebar-icon" style={sticky}>
         <SidebarIcon
           isOpen={this.state.isOpen}
           handleClick={this.toggleSidebar}

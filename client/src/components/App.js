@@ -15,6 +15,7 @@ import UserSettingsPage from './user_pages/UserSettings'
 import UserSignIn from './user_pages/UserSignIn'
 import UserSignUp from './user_pages/UserSignUp'
 import Header from './Header';
+import Sidebar from './Sidebar/Sidebar.js'
 import history from '../history';
 import debounce from 'lodash.debounce';
 import { createCategory } from './createCategory';
@@ -51,15 +52,15 @@ class App extends React.Component {
 
 
   render() {
-    const divStyle = {
-      paddingTop: '65px'
+    const fullHeight = {
+      height: '100vh'
     };
     return (
       <div>
         <Router history={history}>
           <div>
             <Header />
-            <div>
+            <div style={fullHeight}>
               <Switch>
                 <Route path="/" exact component={LandingIndex} />
                 <Route path="/streams/new" exact component={StreamCreate} />

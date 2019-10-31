@@ -22,7 +22,7 @@ export default class LargeCategoryCard extends React.Component {
   }
   renderCard() {
     const titleStyle = {
-      fontSize: ".8rem"
+      fontSize: ".9rem"
     }
     const myCard = {
       border: '1px solid yellow',
@@ -33,7 +33,8 @@ export default class LargeCategoryCard extends React.Component {
     }
 
     const margins = {
-      margin: '0px 4px 7px 4px'
+      margin: '0px 4px 4px 4px',
+      backgroundColor: 'blue',
     }
 
     const truncate = {
@@ -41,12 +42,18 @@ export default class LargeCategoryCard extends React.Component {
       overflow: 'hidden',
       textOverflow: 'ellipsis'
     }
+
+
+
+    const cardWidth = {
+      maxWidth: '252px',
+    }
     return (
-      <Card style={margins} className='h-100'>
-        <Card.Img style={hunna} variant="top" sizes={this.props.sizes} srcSet={this.props.srcSet} src={this.props.img} />
+      <Card style={margins}>
+        <Card.Img variant="top" sizes={this.props.sizesLarge} srcSet={this.props.srcSetLarge} src={this.props.img} />
         <Card.Body>
-          <Card.Title className='' style={titleStyle}>
-            <strong>{this.truncate(this.props.title)}</strong></Card.Title>
+          <Card.Title className='' style={{ ...titleStyle, ...truncate }}>
+            <strong>{this.props.title}</strong></Card.Title>
           <Card.Text>
             {this.getRandomInt()}k viewers
           </Card.Text>
