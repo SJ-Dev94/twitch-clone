@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { database } from '../../../firebaseconfig.js';
 import Container from 'react-bootstrap/Container'
-import Sidebar from '../../Sidebar/Sidebar.js';
+import LandingCarousel from './Carousel.js'
 import MiniDrawer from '../../Sidebar/MiniDrawer.js'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -27,6 +27,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Carousel from "react-bootstrap/Carousel";
 
 
 class LandingLarge extends React.Component {
@@ -75,7 +76,11 @@ class LandingLarge extends React.Component {
 
   renderLarge() {
     const color = {
-      backgroundColor: 'red'
+    }
+
+    const flexContainerRow = {
+      marginLeft: '15%'
+
     }
     const sidebar = {
       height: '100vh',
@@ -98,14 +103,13 @@ class LandingLarge extends React.Component {
     const wrapper = {
       display: 'flex',
       flexDirection: 'row',
-      backgroundColor: 'red',
       height: '100vh',
+      backgroundColor: 'red'
     }
 
     const pad = {
       padding: 'calc( (100vw - env(safe-area-inset-left) - env(safe-area-inset-right)) * 0.01)',
-      border: '1px dotted yellow',
-      backgroundColor: 'purple',
+      backgroundColor: 'purple'
     }
 
     const flexCol = {
@@ -113,25 +117,31 @@ class LandingLarge extends React.Component {
       top: '0rem',
     }
 
+    const SlideStyles = {
+      alignItems: 'center'
+    }
 
 
 
     return (
       <div style={wrapper}>
+
         <div style={flexCol}>
           <MiniDrawer />
         </div>
         <Container fluid={true}>
+          <LandingCarousel />
           <h4 style={{ fontSize: '1.2rem' }}>Categories</h4>
           <Row className='no-gutters' style={pad}>
             {this.state.categories.map((category, index) => {
               return (
-                <Col style={colHeight} xs={6} sm={4} lg={3} xl={2}>
+                <Col style={colHeight} xs={6} sm={4} lg={2} xl={2}>
                   <LargeCategoryCard style={colHeight} title={category.title} key={category.id} srcSetLarge={category.srcSetLarge} img={category.srcLarge} />
                 </Col>
               )
             })}
           </Row>
+          <p>fuck</p>
         </Container>
       </div >
     );

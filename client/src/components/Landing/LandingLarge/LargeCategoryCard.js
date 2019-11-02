@@ -34,7 +34,6 @@ export default class LargeCategoryCard extends React.Component {
 
     const margins = {
       margin: '0px 4px 4px 4px',
-      backgroundColor: 'blue',
     }
 
     const truncate = {

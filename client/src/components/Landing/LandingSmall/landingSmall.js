@@ -72,7 +72,7 @@ class LandingSmall extends React.Component {
         <Row className='no-gutters'>
           {this.state.categories.map((category, index) => {
             return (
-              <Col className="" xs={6} sm={6} md={3}>
+              <Col className="" xs={3} sm={3} md={3}>
                 <CategoryCard title={category.title} key={category.id} sizes={category.sizes} srcSet={category.srcSet} img={category.src} />
               </Col>
             )
